@@ -172,7 +172,7 @@ def get_doctor_availabililty(doctorname=None,specialization=None,location =None)
     cur = conn.cursor()
     # select "ProviderId" from "Provider" where lower("FullName") ilike lower('%{doctorname}%') limit 1 '''
 
-    cur.execute(f'''SELECT "ProviderId" FROM "Provider" WHERE similarity(lower("FullName"), '{doctorname}') > 0.4 ; ''')
+    cur.execute(f'''SELECT "ProviderId" FROM "Provider" WHERE "FullName" ilike '%{doctorname}%' ; ''')
     data = cur.fetchall()
     if len(data)<1:
         return [{"_":"provider does not exists "}]
